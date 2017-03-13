@@ -19,7 +19,7 @@ public class MyUtils {
 		return mnstr;
 	}
 	
-	//Ğ¡ÍæÒâ¶ù£ºÒ»ÄêÖĞ1Ò»¶ÔÓ¦µÄweek£ººÎÎ½1Ò»¶ÔÓ¦£¿¼´ÖÜÒ»¶ÔÓ¦µÄÈÕÆÚÎ²ºÅÎª1¡£
+	//å°ç©æ„å„¿ï¼šä¸€å¹´ä¸­1ä¸€å¯¹åº”çš„weekï¼šä½•è°“1ä¸€å¯¹åº”ï¼Ÿå³å‘¨ä¸€å¯¹åº”çš„æ—¥æœŸå°¾å·ä¸º1ã€‚
 	public static void show1Mon(int year){
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
@@ -30,7 +30,7 @@ public class MyUtils {
 		enD.add(Calendar.MONTH, 11);
 		enD.add(Calendar.DATE, 30);		
 
-		System.out.println(year + "Äê1Ò»¶ÔÓ¦±í:");
+		System.out.println(year + "å¹´1ä¸€å¯¹åº”è¡¨:");
 		System.out.println("Month" + "\t" + "Mon" + "\t" + "Tue" + "\t" + "Wed" + "\t" + "Thu" + "\t" + "Fri");
 		
 		while(!enD.before(cal)){
@@ -49,7 +49,7 @@ public class MyUtils {
 	
 	}
 	
-	//±éÀúÊı×éÔªËØ£¬Ò»Ò»´òÓ¡£»
+	//éå†æ•°ç»„å…ƒç´ ï¼Œä¸€ä¸€æ‰“å°ï¼›
 	public static void showList(ArrayList<Integer> xlst){
 		int ncount = 1;
 		for(int item:xlst){
@@ -63,11 +63,11 @@ public class MyUtils {
 		}
 		System.out.println();
 	}
-	//ÖØÔØshowList·½·¨
+	//é‡è½½showListæ–¹æ³•
 	public static void showList(ArrayList<Integer> xlst, int sx){
 		int ncount = 1;
 		if(sx%2 == 1) {
-			Collections.reverse(xlst); //µ¹Ğò
+			Collections.reverse(xlst); //å€’åº
 		}
 		for(int item:xlst){
 //			System.out.print(item);
@@ -81,7 +81,7 @@ public class MyUtils {
 		System.out.println();
 	}
 	
-	//Fibonacci ¸ø³öÊıÁĞÏîÊı£¬Êä³öµ½Êı×é£»
+	//Fibonacci ç»™å‡ºæ•°åˆ—é¡¹æ•°ï¼Œè¾“å‡ºåˆ°æ•°ç»„ï¼›
 	public static ArrayList<Integer> getFibonacciList(int f) {
 		ArrayList<Integer> fibo = new ArrayList<Integer>();
 		if (f == 1){
@@ -107,7 +107,7 @@ public class MyUtils {
 		return a;
 	}
 	
-	//²éÕÒĞ¡ÓÚÄ³¸öÊıÒÔÄÚµÄÖÊÊı£¬·µ»ØÒ»¸öÁĞ±íArrayList<Integer>£»
+	//æŸ¥æ‰¾å°äºæŸä¸ªæ•°ä»¥å†…çš„è´¨æ•°ï¼Œè¿”å›ä¸€ä¸ªåˆ—è¡¨ArrayList<Integer>ï¼›
 	public static ArrayList<Integer> getPrime(int lessn){
 		if(lessn <= 1){
 			System.out.println("Please input a larger number!");
@@ -131,10 +131,10 @@ public class MyUtils {
 	}
 	
 	/**
-	 * »ñÈ¡Ä³°üÏÂËùÓĞÀà
-	 * @param packageName °üÃû
-	 * @param isRecursion ÊÇ·ñ±éÀú×Ó°ü
-	 * @return ÀàµÄÍêÕûÃû³Æ
+	 * è·å–æŸåŒ…ä¸‹æ‰€æœ‰ç±»
+	 * @param packageName åŒ…å
+	 * @param isRecursion æ˜¯å¦éå†å­åŒ…
+	 * @return ç±»çš„å®Œæ•´åç§°
 	 */
 	public static Set<String> getClassName(String packageName, boolean isRecursion) {
 		Set<String> classNames = null;
@@ -164,7 +164,7 @@ public class MyUtils {
 				}
 			}
 		} else {
-			/* ´ÓËùÓĞµÄjar°üÖĞ²éÕÒ°üÃû */
+			/* ä»æ‰€æœ‰çš„jaråŒ…ä¸­æŸ¥æ‰¾åŒ…å */
 			classNames = getClassNameFromJars(((URLClassLoader) loader).getURLs(), packageName, isRecursion);
 			System.out.println("here" + classNames.toString());
 		}
@@ -173,11 +173,11 @@ public class MyUtils {
 	}
 
 	/**
-	 * ´ÓÏîÄ¿ÎÄ¼ş»ñÈ¡Ä³°üÏÂËùÓĞÀà
-	 * @param filePath ÎÄ¼şÂ·¾¶
-	 * @param className ÀàÃû¼¯ºÏ
-	 * @param isRecursion ÊÇ·ñ±éÀú×Ó°ü
-	 * @return ÀàµÄÍêÕûÃû³Æ
+	 * ä»é¡¹ç›®æ–‡ä»¶è·å–æŸåŒ…ä¸‹æ‰€æœ‰ç±»
+	 * @param filePath æ–‡ä»¶è·¯å¾„
+	 * @param className ç±»åé›†åˆ
+	 * @param isRecursion æ˜¯å¦éå†å­åŒ…
+	 * @return ç±»çš„å®Œæ•´åç§°
 	 */
 	private static Set<String> getClassNameFromDir(String filePath, String packageName, boolean isRecursion) {
 		Set<String> className = new HashSet<String>();
@@ -213,8 +213,8 @@ public class MyUtils {
 			JarEntry jarEntry = jarEntries.nextElement();
 			if(!jarEntry.isDirectory()){
 				/*
-	             * ÕâÀïÊÇÎªÁË·½±ã£¬ÏÈ°Ñ"/" ×ª³É "." ÔÙÅĞ¶Ï ".class" µÄ×ö·¨¿ÉÄÜ»áÓĞbug
-	             * (FIXME: ÏÈ°Ñ"/" ×ª³É "." ÔÙÅĞ¶Ï ".class" µÄ×ö·¨¿ÉÄÜ»áÓĞbug)
+	             * è¿™é‡Œæ˜¯ä¸ºäº†æ–¹ä¾¿ï¼Œå…ˆæŠŠ"/" è½¬æˆ "." å†åˆ¤æ–­ ".class" çš„åšæ³•å¯èƒ½ä¼šæœ‰bug
+	             * (FIXME: å…ˆæŠŠ"/" è½¬æˆ "." å†åˆ¤æ–­ ".class" çš„åšæ³•å¯èƒ½ä¼šæœ‰bug)
 	             */
 				String entryName = jarEntry.getName().replace("/", ".");
 				if (entryName.endsWith(".class") && !entryName.contains("$") && entryName.startsWith(packageName)) {
@@ -232,11 +232,11 @@ public class MyUtils {
 	}
 	
 	/**
-	 * ´ÓËùÓĞjarÖĞËÑË÷¸Ã°ü£¬²¢»ñÈ¡¸Ã°üÏÂËùÓĞÀà
-	 * @param urls URL¼¯ºÏ
-	 * @param packageName °üÂ·¾¶
-	 * @param isRecursion ÊÇ·ñ±éÀú×Ó°ü
-	 * @return ÀàµÄÍêÕûÃû³Æ
+	 * ä»æ‰€æœ‰jarä¸­æœç´¢è¯¥åŒ…ï¼Œå¹¶è·å–è¯¥åŒ…ä¸‹æ‰€æœ‰ç±»
+	 * @param urls URLé›†åˆ
+	 * @param packageName åŒ…è·¯å¾„
+	 * @param isRecursion æ˜¯å¦éå†å­åŒ…
+	 * @return ç±»çš„å®Œæ•´åç§°
 	 */
 	private static Set<String> getClassNameFromJars(URL[] urls, String packageName, boolean isRecursion) {
 		Set<String> classNames = new HashSet<String>();
@@ -244,7 +244,7 @@ public class MyUtils {
 		for (int i = 0; i < urls.length; i++) {
 			String classPath = urls[i].getPath();
 			
-			//²»±ØËÑË÷classesÎÄ¼ş¼Ğ
+			//ä¸å¿…æœç´¢classesæ–‡ä»¶å¤¹
 			if (classPath.endsWith("classes/")) {continue;}
 
 			JarFile jarFile = null;
@@ -262,7 +262,7 @@ public class MyUtils {
 		return classNames;
 	}
 	
-	//FibonacciÊıÁĞÖĞµÄÖÊÊı£¬ÒÔfiboÊıÁĞµÄÏîÊıÎªÈë²Î
+	//Fibonacciæ•°åˆ—ä¸­çš„è´¨æ•°ï¼Œä»¥fiboæ•°åˆ—çš„é¡¹æ•°ä¸ºå…¥å‚
 	private static ArrayList<Integer> getPrimeInFiboList(int fbno) {
 		ArrayList<Integer> arrlstF = getFibonacciList(fbno);
 		ArrayList<Integer> arrlstP = getPrime(arrlstF.get(arrlstF.size()-1));
@@ -275,10 +275,10 @@ public class MyUtils {
 		return arrlstR;		
 	}
 	
-	//Ö÷³ÌĞòÈë¿Ú
+	//ä¸»ç¨‹åºå…¥å£
 	public static void main(String args[]) {	
 		System.out.println("=====Starting=====");
-//		show1Mon(2017);
+		show1Mon(2017);
 //		showList(getFibonacciList(20));
 //		System.out.println(getFiboItemN(20));
 //		System.out.println(getFibonacciList(20).get(19));
