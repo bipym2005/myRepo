@@ -54,7 +54,7 @@ public class MyUtils {
 		int ncount = 1;
 		for(int item:xlst){
 //			System.out.print(item);
-			if(ncount%6!=0){
+			if(ncount%10!=0){
 				System.out.print(item + "\t");
 			}else{
 				System.out.print(item + "\n");
@@ -63,6 +63,21 @@ public class MyUtils {
 		}
 		System.out.println();
 	}
+	
+	public static void showListStr(ArrayList<String> xlst){
+		int ncount = 1;
+		for(String item:xlst){
+//			System.out.print(item);
+			if(ncount%10!=0){
+				System.out.print(item + "\t");
+			}else{
+				System.out.print(item + "\n");
+			}
+			ncount++;
+		}
+		System.out.println();
+	}
+	
 	//重载showList方法
 	public static void showList(ArrayList<Integer> xlst, int sx){
 		int ncount = 1;
@@ -128,6 +143,23 @@ public class MyUtils {
 			lessn = lessn -1;
 		}
 		return pList;
+	}
+	
+	//判断某个数是否为质数
+	public static boolean isPrime(Long pnum){
+		boolean isPrime = true;
+		int s = (int)Math.sqrt(pnum);
+		for(int j=s; j>1; j--){
+			if(pnum%j == 0){
+				isPrime = false;
+				System.out.println("the number " + pnum + " is NOT a prime!");
+				break;
+			}
+		}
+		if(isPrime == true){
+			System.out.println("the number " + pnum + " is a prime!");			
+		}
+		return isPrime;
 	}
 	
 	/**
@@ -278,7 +310,88 @@ public class MyUtils {
 	//主程序入口
 	public static void main(String args[]) {	
 		System.out.println("=====Starting=====");
-		show1Mon(2017);
+
+//		Quiz 003 
+//		The prime factors of 13195 are 5, 7, 13 and 29.
+//		What is the largest prime factor of the number 600851475143 ?
+
+//		long ax = 600851475143L;
+//		int axp = (int) Math.sqrt(ax);
+//		ArrayList<Integer> prmlist = getPrime(axp);
+//		ArrayList<Integer> factorsList = new ArrayList<Integer>();
+//		if(isPrime(ax)){
+//			
+//		}
+//		for(int pn : prmlist){
+//			if(ax%pn == 0){
+//				factorsList.add(pn);
+//			}
+//		}
+//		factorsList.add(1);
+////		showList(factorsList);
+//		System.out.println(factorsList.get(0));
+		
+//		Quiz 004
+		//A palindromic number reads the same both ways. The largest palindrome made
+		// from the product of two 2-digit numbers is 9009 = 91 × 99.
+		//Find the largest palindrome made from the product of two 3-digit numbers.
+		
+		// Thinking ----
+		//		give a number P; 
+		//		get half of the number P(int by up): n; 
+		//		from n to 1, not mod calc, use n to divide n; 
+		//		if full divided, record n and divede result; 
+		//		loop it until n=1; 
+		//		judge the two number both are 3-digit number or not; 
+		//		if it's true, P is what we want!
+		int a = 72;
+		System.out.println("number is: " + a);
+		int tms = 1;
+		if(a%2 == 0){
+			for(int i=0; i<64; i++){
+				a = a/2;
+				if(a%2 != 0){
+					break;
+				}
+				tms += 1;
+			}
+			System.out.println("number times tms is: " + (int)Math.pow(2, tms));
+			System.out.println("factor times is: " + tms);
+		}
+		
+		int minp = 100*100;
+		int maxp = 999*999;
+		System.out.println("The min and max palindromic number is: " + minp +" and " + maxp);
+		ArrayList<Integer> pldrnumList = new ArrayList<Integer>();
+		//确定为6位数，要求最大的，则从9开始，9abba9; 分组搜索，一组没有再搜索下一组。如果是最小，则从1开始，1abba1,做个通用的；
+		//a也从9往0循环，b也一样，先把9abba9这种形式的回文数枚举展示出来；
+		int tmpldr = 0;
+		for(int c=9; c>=8; c--){
+			for(int b=9; b>=8; b--){
+				tmpldr = 9*100001 + c*10010 + b*1100;
+				pldrnumList.add(tmpldr);
+			}
+		}
+		showList(pldrnumList);	
+		
+		ArrayList<String> factorStrList = new ArrayList<String>();
+		
+		for(int P : pldrnumList){
+			int tmpi = P/2;
+			while(tmpi>1){
+				if(P%tmpi == 0){
+					int tmpr = P/tmpi;
+					factorStrList.add(tmpi+"*"+tmpr);
+				}
+				tmpi -= 1;
+			}
+			System.out.println("---------------------------------------------");
+		}
+		
+		System.out.println("Sample:");
+		showListStr(factorStrList);	
+		
+//		show1Mon(2017);
 //		showList(getFibonacciList(20));
 //		System.out.println(getFiboItemN(20));
 //		System.out.println(getFibonacciList(20).get(19));
@@ -293,9 +406,7 @@ public class MyUtils {
 //			}
 //		}else{
 //			System.out.println("What?");
-//		}
-		
-		
+//		}		
 		
 		System.out.println("=====The end!=====");	
 	}
