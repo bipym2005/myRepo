@@ -145,6 +145,30 @@ public class MyUtils {
 		return pList;
 	}
 	
+	//按项数获取质数数列；
+	public static long getPrimeL(long lessn){
+		long nthPrime = 2;
+		if(lessn <= 1){
+			System.out.println("Please input a larger number!");
+		}
+		ArrayList<Long> pList = new ArrayList<Long>();
+		while(lessn>1){
+			boolean isPrime = true;	
+			int s = (int)Math.sqrt(lessn);
+			for (int j=s; j>1; j--){
+				if(lessn%j==0){
+					isPrime = false;
+					break;
+				}
+			}
+			if(isPrime==true){
+				pList.add(lessn);
+			}
+			lessn = lessn -1;
+		}
+		return nthPrime;
+	}
+	
 	//判断某个数是否为质数
 	public static boolean isPrime(Long pnum){
 		boolean isPrime = true;
@@ -152,12 +176,12 @@ public class MyUtils {
 		for(int j=s; j>1; j--){
 			if(pnum%j == 0){
 				isPrime = false;
-				System.out.println("the number " + pnum + " is NOT a prime!");
+//				System.out.println("the number " + pnum + " is NOT a prime!");
 				break;
 			}
 		}
 		if(isPrime == true){
-			System.out.println("the number " + pnum + " is a prime!");			
+//			System.out.println("the number " + pnum + " is a prime!");			
 		}
 		return isPrime;
 	}
@@ -307,9 +331,178 @@ public class MyUtils {
 		return arrlstR;		
 	}
 	
+	//获取质因数的指数
+	public static int getPrimePows(int a, int prm){
+		int pownum = 0;
+		while(a%prm==0){
+			pownum += 1;
+			a = a/prm;
+			if(a%prm!=0){
+				break;
+			}
+		}
+		return pownum;
+	}
+	
+	//分解质因数
+	//type 1
+	public static String getPrimeFactorMultiply(int anum){
+		String apf = "";
+		String apf1 = "";
+		ArrayList<Integer> pflist = new ArrayList<Integer>();
+		ArrayList<Integer> factorPlist = getPrime(anum);
+		Collections.reverse(factorPlist);
+		for(int ipm : factorPlist){
+			int tmpfactorpow = getPrimePows(anum, ipm);
+			for(int j=tmpfactorpow; j>0; j--){
+				apf1 += ipm+",";
+				pflist.add(ipm);
+			}
+			if (tmpfactorpow>1 ) {
+				apf += ipm +"^" + tmpfactorpow + "*";
+			}else if(tmpfactorpow!=0){
+				apf += ipm + "*";
+			}
+		}
+		apf = apf.substring(0, apf.length()-1);
+		apf1 = apf1.substring(0, apf1.length()-1);
+//		showList(pflist);
+		return apf1;
+	}
+	
+	//type 2
+	public static ArrayList<Integer> getPrimeFactorList(int anum){
+		ArrayList<Integer> factorPlist = getPrime(anum);
+		Collections.reverse(factorPlist);
+		ArrayList<Integer> pflist = new ArrayList<Integer>();
+		for(int ipm : factorPlist){
+			int tmpfactorpow = getPrimePows(anum, ipm);
+			for(int j=tmpfactorpow; j>0; j--){
+				pflist.add(ipm);
+			}
+		}
+		return pflist;
+	}
+	
+	//ArrayList substract
+	public static ArrayList<Integer> getSubArrList(ArrayList<Integer> smlist, ArrayList<Integer> bglist){
+		ArrayList<Integer> tmpAL = (ArrayList<Integer>) bglist.clone();
+		for(int x : smlist){
+			if(bglist.contains(x)){
+				tmpAL.remove((Object)x);
+			}
+		}
+		return tmpAL;
+	}
+	
+	//n!的最小公倍数
+	public static long getSmlstMulitple(int n){
+		int tmprs = n;
+		int tmprs2 = n;
+//		long pretmprs = n;
+		while(n>2){
+			tmprs2 *= (n-1);
+			for(int k=2; k<n; k++){
+				if(n%k==0){
+					tmprs2 = tmprs2/k;
+				}
+			}
+			n--;
+		}
+//		pretmprs = tmprs/pretmprs;
+		System.out.println("the number tobe repair: " + tmprs2);
+		int tmprs1 = 1;
+		for(int j=2; j<tmprs; j++){
+			tmprs1 *= j;
+		}
+		return tmprs1;
+	}
+	
+	//1~n，求平方和；
+	public static long getSquareSum(int n){
+		long tmpsqsum = 0;
+		for(int i=1; i<=n; i++){
+			tmpsqsum += i*i;
+		}
+		return tmpsqsum;
+	}
+	//1~n，求和的平方；
+	public static long getSumSquare(int n){
+		long tmpsmsqare = 0;
+		for(int i=1; i<=n; i++){
+			tmpsmsqare += i;
+		}
+		tmpsmsqare *= tmpsmsqare;
+		return tmpsmsqare;
+	}
+	
+	//1~n，平方和与和平方的差；
+	public static long getSSDiff(int n){
+		long rsltn = getSumSquare(n) - getSquareSum(n);
+		return rsltn;
+	}
+	
 	//主程序入口
 	public static void main(String args[]) {	
 		System.out.println("=====Starting=====");
+//		Quiz 008
+		String intstr = "731671765313306249192251196744265747423553491949349698352031277450632623957831801698480186947885184385861560789112949495459501737958331952853208805511"
+				+ "125406987471585238630507156932909632952274430435576689664895044524452316173185640309871112172238311362229893423380308135336276614282806444486645238749"
+				+ "303589072962904915604407723907138105158593079608667017242712188399879790879227492190169972088809377665727333001053367881220235421809751254540594752243"
+				+ "525849077116705560136048395864467063244157221553975369781797784617406495514929086256932197846862248283972241375657056057490261407972968652414535100474"
+				+ "821663704844031998900088952434506585412275886668811642717147992444292823086346567481391912316282458617866458359124566529476545682848912883142607690042"
+				+ "242190226710556263211111093705442175069416589604080719840385096245544436298123098787992724428490918884580156166097919133875499200524063689912560717606"
+				+ "0588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450";
+		System.out.println(intstr.length());
+		System.out.println(intstr.charAt(0));
+		int x1 = Character.getNumericValue(intstr.charAt(0));
+		System.out.println(x1);
+		
+
+		System.out.println("------------");
+		
+//		Quiz 010
+//		int xxx= 2000000;
+//		long sump = 0;
+//		for(int j=2; j<=xxx; j++){
+//			if(isPrime((long) j)){
+//				sump += j;
+//			}
+//		}
+//		System.out.println("the sum of the prime list is: " + sump);		
+		
+//		Quiz 007
+//		By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+//		What is the 10 001st prime number?
+//		System.out.println(isPrime(4L));
+//		int j=0;
+//		int p=0;
+//		for(int i=2; i<110000; i++){
+//			if(isPrime((long)i)){
+//				p = i;
+//				j++;
+//			}
+//			if(j==10001){
+//				break;
+//			}
+//		}
+//		System.out.println("100以内，最大的质数等于 " + p + "，这是第 " + j + "个质数");
+//		showList(getPrime(11),1);
+		
+		
+//		Quiz 006
+//		The sum of the squares of the first ten natural numbers is,
+//		12 + 22 + ... + 102 = 385
+//		The square of the sum of the first ten natural numbers is,
+//		(1 + 2 + ... + 10)2 = 552 = 3025
+//		Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
+//		Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+
+		System.out.println(getSquareSum(100));
+		System.out.println(getSumSquare(100));
+		System.out.println(getSSDiff(100));	
+
+		System.out.println("------------");
 
 //		Quiz 003 
 //		The prime factors of 13195 are 5, 7, 13 and 29.
@@ -344,52 +537,101 @@ public class MyUtils {
 		//		loop it until n=1; 
 		//		judge the two number both are 3-digit number or not; 
 		//		if it's true, P is what we want!
-		int a = 72;
-		System.out.println("number is: " + a);
-		int tms = 1;
-		if(a%2 == 0){
-			for(int i=0; i<64; i++){
-				a = a/2;
-				if(a%2 != 0){
-					break;
-				}
-				tms += 1;
-			}
-			System.out.println("number times tms is: " + (int)Math.pow(2, tms));
-			System.out.println("factor times is: " + tms);
-		}
-		
-		int minp = 100*100;
-		int maxp = 999*999;
-		System.out.println("The min and max palindromic number is: " + minp +" and " + maxp);
-		ArrayList<Integer> pldrnumList = new ArrayList<Integer>();
+
 		//确定为6位数，要求最大的，则从9开始，9abba9; 分组搜索，一组没有再搜索下一组。如果是最小，则从1开始，1abba1,做个通用的；
 		//a也从9往0循环，b也一样，先把9abba9这种形式的回文数枚举展示出来；
-		int tmpldr = 0;
-		for(int c=9; c>=8; c--){
-			for(int b=9; b>=8; b--){
-				tmpldr = 9*100001 + c*10010 + b*1100;
-				pldrnumList.add(tmpldr);
-			}
-		}
-		showList(pldrnumList);	
 		
-		ArrayList<String> factorStrList = new ArrayList<String>();
+//		ArrayList<Integer> pldrnumList = new ArrayList<Integer>();
+//		int tmpldr = 0;
+//		for(int c=9; c>=0; c--){
+//			for(int b=9; b>=0; b--){
+//				tmpldr = 9*100001 + c*10010 + b*1100;
+//				pldrnumList.add(tmpldr);
+//			}
+//		}
+//		showList(pldrnumList);	
+//		
+//		ArrayList<String> factorStrList = new ArrayList<String>();
+//		
+//		for(int P : pldrnumList){
+//			int tmpi = P/2;
+//			while(tmpi>1){
+//				if(P%tmpi == 0){
+//					int tmpr = P/tmpi;
+//					if(tmpr>=100 && tmpr<=999 && tmpi>=100 && tmpi<=999){
+//						factorStrList.add(tmpi+"*"+tmpr);						
+//					}else if(Math.abs(tmpr-tmpi)<20){
+//						factorStrList.add(tmpi+"*"+tmpr);
+//					}
+//				}
+//				tmpi -= 1;
+//			}
+//		}
+//		
+//		System.out.println("Sample:");
+//		showListStr(factorStrList);	
 		
-		for(int P : pldrnumList){
-			int tmpi = P/2;
-			while(tmpi>1){
-				if(P%tmpi == 0){
-					int tmpr = P/tmpi;
-					factorStrList.add(tmpi+"*"+tmpr);
+		//Quiz 005 --OK
+//		2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+//		What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+		//Thinking:
+		//try to use recursion get two numbers smallest multiple. and need another method to get the smallest multiple, to do so, then need to 
+		//apart number into prime factors multiply.
+		
+		long forten = 2520;
+		for(int m=11; m<20; m++){
+			int ma = (int) (forten%m);
+			if(ma != 0){
+				if(m%ma==0){
+					forten *= m/ma;
+				}else{
+					forten *= m;					
 				}
-				tmpi -= 1;
 			}
-			System.out.println("---------------------------------------------");
 		}
+		System.out.println(forten);
+		System.out.println("------------");
+
 		
-		System.out.println("Sample:");
-		showListStr(factorStrList);	
+//		int a = 2520;
+//		String apf = "";
+//		ArrayList<Integer> factorPlist = getPrime(a);
+//		Collections.reverse(factorPlist);
+//		for(int ipm : factorPlist){
+//			int tmpfactorpow = getPrimePows(a, ipm);
+//			if (tmpfactorpow>1 ) {
+//				apf += ipm +"^" + tmpfactorpow + "*";
+//			}else if(tmpfactorpow!=0){
+//				apf += ipm + "*";
+//			}
+//		}	
+//		System.out.println(getPrimePows(72, 8));
+
+//		System.out.println("2520 = " + getPrimeFactorMultiply(2520));
+//		System.out.println("16 = " + getPrimeFactorMultiply(16));
+
+//		ArrayList<Integer> apflist = getPrimeFactorList(2520);
+//		ArrayList<Integer> bpflist = getPrimeFactorList(16);
+//		
+//		System.out.println("----------------------------------");
+//		ArrayList<Integer> rslist = new ArrayList<Integer>();
+//		ArrayList<Integer> apflist1 = (ArrayList<Integer>) apflist.clone();
+//		ArrayList<Integer> bpflist1 = (ArrayList<Integer>) bpflist.clone();
+//		for(int x : bpflist){
+//			if(apflist.contains(x)){
+//				rslist.add(x);
+//				apflist1.remove((Object)x);
+//				bpflist1.remove((Object)x);
+//			}
+//		}
+		
+//		showList(apflist);
+//		showList(apflist1);
+//		showList(bpflist);
+//		showList(bpflist1);
+//		showList(rslist);
+		
+//		System.out.println(getSmlstMulitple(10));
 		
 //		show1Mon(2017);
 //		showList(getFibonacciList(20));
