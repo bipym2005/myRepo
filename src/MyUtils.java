@@ -445,6 +445,16 @@ public class MyUtils {
 	//主程序入口
 	public static void main(String args[]) {	
 		System.out.println("=====Starting=====");
+		//Quiz 009  finding GouGuNumbersGroup;
+		//how to: a^2 + b^2 = c^2, assume a<b<c; if a is an odd number, then a^2 = b+c, and b+1=c ; 
+		//if a is an even number, is just scale up of odd of a\b\c.
+		//so when a is odd:  (a^2-1)/2 = b when a is even: a%2^2-1)/2=b^(a%2); c will be b+1, so get a group of a/b/c;
+		
+		
+		
+		
+		
+		
 //		Quiz 008
 		String intstr = "731671765313306249192251196744265747423553491949349698352031277450632623957831801698480186947885184385861560789112949495459501737958331952853208805511"
 				+ "125406987471585238630507156932909632952274430435576689664895044524452316173185640309871112172238311362229893423380308135336276614282806444486645238749"
@@ -460,16 +470,20 @@ public class MyUtils {
 		
 		long prdnum1=1;
 		long prdnum2=1;
-		for(int i=0; i<997; i+=4){
-			if(prdnum2>prdnum2){
-				prdnum2 = prdnum1;
+		for(int i=0; i<988; i++){
+			if(prdnum2>prdnum1){
+				prdnum1 = prdnum2;
 			}
-			for(int j=i; j<i+4; j++){
-				int charint = Character.getNumericValue(intstr.charAt(j);
+			prdnum2 = 1;
+			for(int j=i; j<i+13; j++){
+
+				int charint = Character.getNumericValue(intstr.charAt(j));
+//				System.out.print(charint + "\t");
 				prdnum2 *= charint;
 			}
+//			System.out.println(prdnum2 + "\n");
 		}
-		System.out.println("The largest 4-digit product is: " + prdnum2);
+		System.out.println("The largest 4-digit product is: " + prdnum1);
 
 		System.out.println("------------");
 		
@@ -510,11 +524,11 @@ public class MyUtils {
 //		Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
 //		Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 
-		System.out.println(getSquareSum(100));
-		System.out.println(getSumSquare(100));
-		System.out.println(getSSDiff(100));	
-
-		System.out.println("------------");
+//		System.out.println(getSquareSum(100));
+//		System.out.println(getSumSquare(100));
+//		System.out.println(getSSDiff(100));	
+//
+//		System.out.println("------------");
 
 //		Quiz 003 
 //		The prime factors of 13195 are 5, 7, 13 and 29.
