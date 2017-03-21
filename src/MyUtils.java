@@ -453,11 +453,23 @@ public class MyUtils {
 				+ "821663704844031998900088952434506585412275886668811642717147992444292823086346567481391912316282458617866458359124566529476545682848912883142607690042"
 				+ "242190226710556263211111093705442175069416589604080719840385096245544436298123098787992724428490918884580156166097919133875499200524063689912560717606"
 				+ "0588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450";
-		System.out.println(intstr.length());
-		System.out.println(intstr.charAt(0));
-		int x1 = Character.getNumericValue(intstr.charAt(0));
-		System.out.println(x1);
+		// System.out.println(intstr.length());
+		// System.out.println(intstr.charAt(0));
+		// int x1 = Character.getNumericValue(intstr.charAt(0));
+		// System.out.println(x1);
 		
+		long prdnum1=1;
+		long prdnum2=1;
+		for(int i=0; i<997; i+=4){
+			if(prdnum2>prdnum2){
+				prdnum2 = prdnum1;
+			}
+			for(int j=i; j<i+4; j++){
+				int charint = Character.getNumericValue(intstr.charAt(j);
+				prdnum2 *= charint;
+			}
+		}
+		System.out.println("The largest 4-digit product is: " + prdnum2);
 
 		System.out.println("------------");
 		
