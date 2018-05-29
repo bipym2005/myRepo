@@ -466,7 +466,7 @@ def get_trnum(n):
 
 def is_trnum(x):
     a = (math.sqrt(1+8*x)-1)/2
-    return a
+    return int(a)
 
 def get_factor_list(n):
     flst = []
@@ -477,32 +477,53 @@ def get_factor_list(n):
     if n<=0:
         print("n must large than 0")
     return flst
-
+'''
 # too slow, 只能使用必杀技了！
-n=2000
+n=12374
 while n!=0:
     yhnum = get_trnum(n)
     flst = get_factor_list(yhnum)
     ln = len(flst)
-    if ln > 10:
+    if ln > 100:
         #print(flst)
         print(str(yhnum) + "---" + str(ln))
-    if ln > 50:
+    if ln > 500:
         break
     n += 1
-
-#print(get_trnum(100))
+'''
+print(get_trnum(12375))
 
 #print(get_factor_list(2031120))
 #print(get_prime_factor(2031120))
-print(get_factor_list(500))
-print(get_prime_factor(500))
+#print(get_factor_list(76576500))
+#print(len(get_factor_list(76576500)))
+#print(get_prime_factor(500))
 
-print(is_trnum(28520128))
+print(is_trnum(76576500))
 
 #print(int(math.pow(2,166)*math.pow(3,2)))
 
+list_nxm_prdct = []
+def get_nm_prdct(x):
+    tmplst = []
+    for i in range(x,1,-1):
+        print(i)
 
+get_nm_prdct(10)
+
+
+'''
+def get_nm_prdct(x):
+    for i in range(x,2,-1):
+        tmp = x%i
+        if tmp is num: 
+            add(i,tmp) to a list;
+            if tmp is not a prime:
+                loop again
+     return a 2v-list
+
+and each item list, elements's product is X!
+'''
 
 
 
